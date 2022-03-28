@@ -15,15 +15,25 @@ cd ..
 catkin_make -j4
 ```
 
-# Run
+# Run with dataset
+
+## get bag file
 
 ```sh
-rosbag play --clock <bag-file>
+cd dataset
+wget http://ais.informatik.uni-freiburg.de/slamevaluation/datasets/intel.clf
+python ../scripts/clf2bag.py
+```
+
+## run
+
+```sh
+rosbag play --clock intel.bag
 
 rosparam set use_sim_time true
-rosrun gmapping slam_gmapping scan:=base_scan
+rosrun gmapping slam_gmapping [scan:=base_scan]
 # or
-roslaunch gmapping slam_gmapping_pr2.launch
+roslaunch gmapping slam_gmapping_pr2.launch [scan:=base_scan]
 ```
 
 rosgraph
